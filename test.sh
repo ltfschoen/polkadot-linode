@@ -1,5 +1,11 @@
 # Host Machine;
-# 
+
+# Zip latest PoC-2 chain
+tar -cvzf 2018-08-01-db-krummelanke.tar.gz "/Users/Ls/Library/Application Support/Polkadot/chains/krummelanke/db"
+
+# Copy latest PoC-2 chain to Linode
+rsync -avz "/Users/Ls/Library/Application Support/Polkadot/chains/krummelanke/db/2018-08-01-db-krummelanke.tar.gz" root@172.104.142.185:/root
+
 # - Copy custom Docker files over from host machine with Rsync
 #   - https://www.linode.com/docs/tools-reference/tools/introduction-to-rsync/
 rsync -az --verbose --progress --stats --exclude='.git/' ~/code/linode root@172.104.142.185:/root;

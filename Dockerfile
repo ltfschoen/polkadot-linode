@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.10.1
 LABEL maintainer "chevdor@gmail.com"
 
 ARG PROFILE=release
-ARG POLKADOT_VERSION=v0.2
+ARG POLKADOT_VERSION=v0.2.1
 
 RUN mkdir -p polkadot && \
   apt-get update && \
