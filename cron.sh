@@ -21,5 +21,12 @@ AFTER_CRASHED=countCrashedContainers()
 
 echo "$AFTER_CRASHED"
 
-# if move containers after running script that before, then
+# if more containers after running script that before, then
 # remove all older containers that are running older versions
+
+docker container prune   # Remove all stopped containers
+docker volume prune      # Remove all unused volumes
+docker image prune       # Remove unused images
+docker system prune      # All of the above, in this order: containers, volumes, images
+
+docker system df         # Show docker disk usage, including space reclaimable by pruning
