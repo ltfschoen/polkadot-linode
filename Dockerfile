@@ -2,7 +2,6 @@ FROM phusion/baseimage:0.10.1
 LABEL maintainer "chevdor@gmail.com"
 
 ARG PROFILE=release
-ARG POLKADOT_VERSION=v0.2.2
 
 RUN mkdir -p polkadot && \
   apt-get update && \
@@ -23,8 +22,9 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   git clone https://github.com/paritytech/polkadot.git && \
   cd polkadot && \
   git remote add upstream https://github.com/paritytech/polkadot && \
-  git fetch upstream ${POLKADOT_VERSION}:${POLKADOT_VERSION} && \
-  git checkout ${POLKADOT_VERSION} && \
+  POLKADOT_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) && \
+  git fetch upstream ${$POLKADOT_VERSION}:${$POLKADOT_VERSION} && \
+  git checkout ${$POLKADOT_VERSION} && \
   ./build.sh && \
   cargo build --$PROFILE && \
   mv target/$PROFILE/polkadot /usr/local/bin && \
