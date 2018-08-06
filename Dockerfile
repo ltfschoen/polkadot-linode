@@ -24,8 +24,8 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   git remote add upstream https://github.com/paritytech/polkadot && \
   POLKADOT_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) && \
   echo $POLKADOT_VERSION && \
-  git fetch upstream ${$POLKADOT_VERSION}:${$POLKADOT_VERSION} && \
-  git checkout ${$POLKADOT_VERSION} && \
+  git fetch upstream $POLKADOT_VERSION:$POLKADOT_VERSION && \
+  git checkout $POLKADOT_VERSION && \
   ./build.sh && \
   cargo build --$PROFILE && \
   mv target/$PROFILE/polkadot /usr/local/bin && \
