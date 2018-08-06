@@ -57,4 +57,10 @@ polkadot \
 # https://manager.linode.com/linodes/remote_access/linode9256436
 # https://www.linode.com/docs/troubleshooting/troubleshooting/
 
+# Show Docker logs @chevdor
+# docker logs -f polkadot.
+
+# detach from tty without terminating running command with escape sequence
+# CTRL+P and Q (hold CTRL the whole time)
+# https://stackoverflow.com/questions/25267372/correct-way-to-detach-from-a-container-without-stopping-it
 
