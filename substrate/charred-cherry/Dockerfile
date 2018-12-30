@@ -26,9 +26,8 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   git checkout $SUBSTRATE_VERSION && \
   ./scripts/build.sh && \
   cargo build --$PROFILE && \
-  cp target/$PROFILE/substrate /usr/local/bin && \
-  cargo clean && \
-  rm -rf /tmp/*
+  echo $PWD && \
+  mv target/$PROFILE/substrate /usr/local/bin
 
 WORKDIR /charred-cherry/substrate
 EXPOSE 30333 30344 9933 9944

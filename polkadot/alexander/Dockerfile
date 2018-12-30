@@ -26,9 +26,8 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   git checkout $POLKADOT_VERSION && \
   ./scripts/build.sh && \
   cargo build --$PROFILE && \
-  cp target/$PROFILE/polkadot /usr/local/bin && \
-  cargo clean && \
-  rm -rf /tmp/*
+  echo $PWD && \
+  mv target/$PROFILE/polkadot /usr/local/bin
 
 WORKDIR /alexander/polkadot
 EXPOSE 30333 30344 9933 9944

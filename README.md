@@ -115,8 +115,7 @@ screen -S root
 Start Substrate node in root screen
 
 ```
-cd /substrate;
-./target/release/substrate \
+substrate \
   --validator \
   --base-path "/root/charred-cherry" \
   --chain "charred-cherry" \
@@ -240,7 +239,7 @@ polkadot \
   --execution both \
   --key "<INSERT_ACCOUNT_RAW_SEED_WITHOUT_0x_PREFIX>" \
   --keystore-path "/root/alex/keys" \
-  --name "SCON'S STAKE! 🔥🔥🔥" \
+  --name "UNMISTAKABLE STAKE! 🔥🔥🔥" \
   --node-key "<INSERT_ACCOUNT_RAW_SEED_WITHOUT_0x_PREFIX>" \
   --port 30333 \
   --pruning 256 \
