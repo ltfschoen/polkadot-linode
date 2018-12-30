@@ -1,6 +1,15 @@
-### Create PoC-3 Substrate Node
+# README
 
-#### Create a Basic Linode Instance
+Create a PoC-3 Substrate and Polkadot Node using [Linode account](https://www.linode.com/?r=4dbc9d2dfa5ba217a93e48d74a5b230eb5810cc0) that may be viewed on [telemetry](https://telemetry.polkadot.io).
+
+# Table of Contents
+  * [Create PoC-3 Substrate Node](#chapter-0)
+  * [Create PoC-3 Polkadot Node](#chapter-1)
+  * [Miscellaneous](#chapter-2)
+
+## Create PoC-3 Substrate Node <a id="chapter-0"></a>
+
+### Create a Basic Linode Instance
 
 Create a [Linode account](https://www.linode.com/?r=4dbc9d2dfa5ba217a93e48d74a5b230eb5810cc0)
 
@@ -20,7 +29,7 @@ Boot Image
 * Go to "Dashboard" of Linode instance
 * Click "Boot"
 
-#### Remotely Access the Linode Instance
+### Remotely Access the Linode Instance
 
 * Clone https://github.com/ltfschoen/polkadot-linode
 * Change to cloned directory
@@ -30,7 +39,7 @@ Boot Image
 * Go to "Remote Access" of Linode instance
 * Copy the "SSH Access" command from the Linode UI. i.e. ssh root@<INSERT_IP_ADDRESS_LINODE_INSTANCE_SUBSTRATE>
 
-#### Install Docker on the Linode Instance
+### Install Docker on the Linode Instance
 
 Use the IP Address from the SSH Access command to run the script to install Docker on the Linode. Note that if you get warning `WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!` then remove the contents of /Users/scon/.ssh/known_hosts and try again.
 
@@ -38,7 +47,7 @@ Use the IP Address from the SSH Access command to run the script to install Dock
 ssh root@<INSERT_IP_ADDRESS_LINODE_INSTANCE_SUBSTRATE> 'bash -s' < setup-docker.sh;
 ```
 
-#### Copy a directory from the Host Machine to the Linode Instance
+### Copy a directory from the Host Machine to the Linode Instance
 
 Use the IP Address from the SSH Access command to copy the cloned repo (containing custom Docker files) from the host machine to the Linode using Rsync. See https://www.linode.com/docs/tools-reference/tools/introduction-to-rsync/. Note that instead we could have simply SSHed into the Linode Instance and then simply cloned the repository with `git clone https://github.com/ltfschoen/polkadot-linode;`
 
@@ -46,13 +55,13 @@ Use the IP Address from the SSH Access command to copy the cloned repo (containi
 rsync -az --verbose --progress --stats --exclude='.git/' ~/code/src/ltfschoen/polkadot-linode root@<INSERT_IP_ADDRESS_LINODE_INSTANCE_SUBSTRATE>:/root;
 ```
 
-#### SSH Authentication into to the Linode Instance
+### SSH Authentication into to the Linode Instance
 
 ```
 ssh root@<INSERT_IP_ADDRESS_LINODE_INSTANCE_SUBSTRATE>
 ```
 
-#### Create a Docker Container in the Linode Instance
+### Create a Docker Container in the Linode Instance
 
 Verify that the Linode Instance has Docker installed
 
@@ -67,7 +76,7 @@ cd ~/polkadot-linode/substrate/charred-cherry;
 docker-compose up --force-recreate --build -d;
 ```
 
-#### Access the Docker Container in the Linode Instance
+### Access the Docker Container in the Linode Instance
 
 Enter Docker container using Bash
 
@@ -75,7 +84,7 @@ Enter Docker container using Bash
 docker exec -it $(docker ps -q) bash;
 ```
 
-#### Interact with Substrate
+### Interact with Substrate
 
 Go to https://polkadot.js.org/apps
 
@@ -85,7 +94,7 @@ Select "Charred Cherry" (Substrate) from drop-down
 
 Save & Reload
 
-#### Create Account
+### Create Account
 
 Go to Accounts
 
@@ -95,7 +104,7 @@ Select "Raw Seed" from the drop-down
 
 Enter and remember an account name and password, click the account icon to copy the account address, and remember the raw seed as we will use this value (without the prefix `0x`) for the `--key` and `--node-key` values when starting the node.
 
-#### Start Node
+### Start Node
 
 Create root screen
 
@@ -127,7 +136,7 @@ Create a second window (non-root) using the `screen` program by pressing CTRL + 
 
 Close the Bash Terminal tab. Note that since a second window within the Bash Terminal tab was running it does not kill the process that was running in the root window
 
-#### Restart Node
+### Restart Node
 
 WARNING: This approach will require you to sync the chain DB from scratch. Backup and load the chain DB first.
 
@@ -155,7 +164,7 @@ docker exec -it $(docker ps -q) bash;
 
 Start the node
 
-#### View Node Information
+### View Node Information
 
 Open a Bash Terminal tab and SSH into Linode
 ```
@@ -172,29 +181,29 @@ View Disk Usage of Substrate chain DB. Note that 60,000 blocks used up 750 MB
 du -hs /root/charred-cherry
 ```
 
-### Create PoC-3 Polkadot Node
+## Create PoC-3 Polkadot Node <a id="chapter-1"></a>
 
-#### Create a Basic Linode Instance
+### Create a Basic Linode Instance
 
-Repeat steps from "Create PoC-3 Polkadot Node"
+Repeat steps from "Create PoC-3 Substrate Node"
 
-#### Remotely Access the Linode Instance
+### Remotely Access the Linode Instance
 
-Repeat steps from "Create PoC-3 Polkadot Node"
+Repeat steps from "Create PoC-3 Substrate Node"
 
-#### Install Docker on the Linode Instance
+### Install Docker on the Linode Instance
 
-Repeat steps from "Create PoC-3 Polkadot Node"
+Repeat steps from "Create PoC-3 Substrate Node"
 
-#### Copy a directory from the Host Machine to the Linode Instance
+### Copy a directory from the Host Machine to the Linode Instance
 
-Repeat steps from "Create PoC-3 Polkadot Node"
+Repeat steps from "Create PoC-3 Substrate Node"
 
-#### SSH Authentication into to the Linode Instance
+### SSH Authentication into to the Linode Instance
 
-Repeat steps from "Create PoC-3 Polkadot Node"
+Repeat steps from "Create PoC-3 Substrate Node"
 
-#### Create a Docker Container in the Linode Instance
+### Create a Docker Container in the Linode Instance
 
 Verify that the Linode Instance has Docker installed
 
@@ -209,11 +218,11 @@ cd ~/polkadot-linode/polkadot/alexander;
 docker-compose up --force-recreate --build -d;
 ```
 
-#### Access the Docker Container in the Linode Instance
+### Access the Docker Container in the Linode Instance
 
 Repeat steps from "Create PoC-3 Polkadot Node"
 
-#### Start Node
+### Start Node
 
 Create root screen
 
@@ -244,7 +253,7 @@ Create a second window (non-root) using the `screen` program by pressing CTRL + 
 
 Close the Bash Terminal tab. Note that since a second window within the Bash Terminal tab was running it does not kill the process that was running in the root window
 
-#### View Node Information
+### View Node Information
 
 Open a Bash Terminal tab and SSH into Linode
 ```
@@ -261,7 +270,7 @@ View Disk Usage of Substrate chain DB
 du -hs /root/alexander
 ```
 
-#### Interact with Polkadot
+### Interact with Polkadot
 
 Go to https://polkadot.js.org/apps
 
@@ -271,9 +280,9 @@ Select "Alexander" (Polkadot) from drop-down
 
 Save & Reload
 
-### Miscellaneous
+## Miscellaneous <a id="chapter-2"></a>
 
-#### Share Chain Database
+### Share Chain Database
 
 Zip latest chain
 
@@ -287,28 +296,28 @@ Copy latest chain to Linode
 rsync -avz "/Users/Ls/Library/Application Support/Polkadot/chains/krummelanke/db/2018-08-01-db-krummelanke.tar.gz" root@<INSERT_IP_ADDRESS_LINODE_INSTANCE_SUBSTRATE_OR_POLKADOT>:/root
 ```
 
-#### Show System Information of Linode Instance
+### Show System Information of Linode Instance
 
 ```
 cd ~/polkadot-linode;
 bash system-info.sh
 ```
 
-#### Show Docker Information of Linode Instance
+### Show Docker Information of Linode Instance
 
 ```
 cd ~/polkadot-linode;
 bash docker-info.sh
 ```
 
-#### Destroy all Docker Images and Containers on the Linode Instance
+### Destroy all Docker Images and Containers on the Linode Instance
 
 ```
 cd ~/polkadot-linode;
 bash destroy.sh
 ```
 
-#### Creation of Additional Nodes
+### Creation of Additional Nodes
 
 Creation of additional Substrate or Polkadot Nodes should use a different `--base-path`, have a different name, run on a different port `--port` (i.e. initial node `30333`, second node `30334`, etc), and the `--bootnodes` should include details of other initial nodes shown in Bash Terminal (i.e. `--bootnodes 'enode://QmPLDpxxhYL7dBiaHH26YqzXjLaaADoa4ShJSDnufgPpm1@127.0.0.1:30333'`)
 
