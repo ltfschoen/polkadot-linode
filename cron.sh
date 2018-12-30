@@ -21,7 +21,7 @@ AFTER_CRASHED=countCrashedContainers()
 
 echo "$AFTER_CRASHED"
 
-# if more containers after running script that before, then
+# if more containers after running script than before, then
 # remove all older containers that are running older versions
 
 docker container prune   # Remove all stopped containers

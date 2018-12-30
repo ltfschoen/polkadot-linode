@@ -1,12 +1,9 @@
+#!/usr/bin/env bash
+
 # Run with:
 #   cd /Users/Ls/code/linode;
 #   ssh root@172.104.142.185 ARG2="arg2" 'bash -s' < setup-docker.sh; 
 #   ssh root@172.104.142.185;
-
-# System info, set hostname and timezone
-hostnamectl set-hostname scon
-timedatectl set-timezone 'Australia/Sydney'
-uname -a
 
 # Setup Docker CE
 #

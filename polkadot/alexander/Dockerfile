@@ -1,15 +1,12 @@
 FROM phusion/baseimage:0.10.1
-LABEL maintainer "chevdor@gmail.com"
+LABEL maintainer "ltfschoen@gmail.com"
 
 ARG PROFILE=release
 
-RUN mkdir -p polkadot && \
-  apt-get update && \
+RUN apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y cmake pkg-config libssl-dev git && \
-  apt-get clean && \
-  mkdir -p /root/.local/share/Polkadot && \
-  ln -s /root/.local/share/Polkadot /data
+  apt-get install -y cmake pkg-config libssl-dev git clang libclang-dev screen && \
+  apt-get clean
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   echo 'PATH="$/root/.cargo/bin:$PATH";' >> ~/.bash_profile && \
@@ -19,6 +16,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   rustup update stable && rustup default stable && \
   cargo install --git https://github.com/alexcrichton/wasm-gc --force && \
   cargo install --git https://github.com/pepyakin/wasm-export-table.git --force && \
+  mkdir -p alexander && cd alexander && \
   git clone https://github.com/paritytech/polkadot.git && \
   cd polkadot && \
   git remote add upstream https://github.com/paritytech/polkadot && \
@@ -26,13 +24,13 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
   echo $POLKADOT_VERSION && \
   git fetch upstream $POLKADOT_VERSION:$POLKADOT_VERSION && \
   git checkout $POLKADOT_VERSION && \
-  ./build.sh && \
+  ./scripts/build.sh && \
   cargo build --$PROFILE && \
-  mv target/$PROFILE/polkadot /usr/local/bin && \
+  cp target/$PROFILE/polkadot /usr/local/bin && \
   cargo clean && \
   rm -rf /tmp/*
 
-WORKDIR /polkadot
+WORKDIR /alexander/polkadot
 EXPOSE 30333 30344 9933 9944
 
 CMD ["/bin/sh", "polkadot"]
